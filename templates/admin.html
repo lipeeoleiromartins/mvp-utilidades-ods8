@@ -1,0 +1,96 @@
+{% extends 'base.html' %} {% block content %}
+<div
+  class="bg-slate-900 text-white text-center py-1.5 text-[10px] font-semibold mb-3 rounded"
+>
+  ADMINISTRAÇÃO & INVENTÁRIO
+</div>
+
+{% if alerta %}
+<div
+  class="bg-red-100 border border-red-400 text-red-700 px-2 py-1.5 rounded text-[10px] font-bold mb-2 text-center"
+>
+  ⚠️ {{ alerta }}
+</div>
+{% endif %}
+
+<div class="overflow-x-auto mb-3">
+  <table class="w-full text-[10px] text-left">
+    <thead class="bg-gray-200 text-gray-700">
+      <tr>
+        <th class="p-1.5">Produto</th>
+        <th class="p-1.5">Stock</th>
+        <th class="p-1.5">Preço</th>
+        <th class="p-1.5">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in produtos %}
+      <tr class="border-b">
+        <td class="p-1.5 font-medium">{{ p.nome }}</td>
+        <td class="p-1.5">
+          {% if p.estoque <= 5 %}
+          <span class="bg-red-600 text-white px-1.5 py-0.5 rounded font-bold"
+            >Baixo Stock ({{ p.estoque }})</span
+          >
+          {% else %}
+          <span class="bg-green-600 text-white px-1.5 py-0.5 rounded font-bold"
+            >{{ p.estoque }}</span
+          >
+          {% endif %}
+        </td>
+        <td class="p-1.5">R$ {{ "%.2f"|format(p.preco) }}</td>
+        <td class="p-1.5 text-green-600 font-bold">Ativo</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<form method="POST" class="space-y-1.5 border-t pt-2">
+  <h4 class="font-bold text-[11px] text-gray-700">Adicionar Novo Produto</h4>
+  <input
+    type="text"
+    name="nome"
+    placeholder="Nome do produto"
+    required
+    class="w-full p-1.5 border rounded text-[10px]"
+  />
+  <input
+    type="text"
+    name="categoria"
+    placeholder="Categoria"
+    required
+    class="w-full p-1.5 border rounded text-[10px]"
+  />
+  <div class="flex gap-1.5">
+    <input
+      type="number"
+      step="0.01"
+      name="preco"
+      placeholder="Preço"
+      required
+      class="w-1/2 p-1.5 border rounded text-[10px]"
+    />
+    <input
+      type="number"
+      name="estoque"
+      placeholder="Stock"
+      required
+      class="w-1/2 p-1.5 border rounded text-[10px]"
+    />
+  </div>
+  <button
+    type="submit"
+    class="w-full bg-slate-800 text-white font-bold py-1.5 rounded text-[10px] hover:bg-slate-900"
+  >
+    + Adicionar Produto
+  </button>
+</form>
+<div class="mt-2 text-center">
+  <a
+    href="{{ url_for('catalogo') }}"
+    class="text-[10px] text-gray-500 underline"
+    >← Voltar ao Catálogo</a
+  >
+</div>
+{% endblock %}

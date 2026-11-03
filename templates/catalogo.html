@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Banner / Header da Loja -->
+<div
+  class="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 text-white p-5 rounded-b-2xl shadow-sm"
+>
+  <div class="flex items-center justify-between mb-3">
+    <span
+      class="bg-blue-500/20 text-blue-300 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-500/30"
+    >
+      <i class="fa-solid fa-circle-check text-[9px] mr-1"></i> Loja Parceira ODS
+      8
+    </span>
+    <span class="text-[11px] text-slate-400"
+      ><i class="fa-solid fa-location-dot mr-1"></i> Atendimento Local</span
+    >
+  </div>
+  <h2 class="text-xl font-extrabold tracking-tight">Ferramentas & Materiais</h2>
+  <p class="text-xs text-slate-300 mt-1">
+    Peça diretamente pelo WhatsApp com rápida entrega na região.
+  </p>
+
+  <!-- Barra de Busca Avançada -->
+  <div class="mt-4 relative">
+    <i
+      class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"
+    ></i>
+    <input
+      type="text"
+      placeholder="Buscar martelo, furadeira, lâmpadas..."
+      class="w-full pl-9 pr-4 py-2.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+    />
+  </div>
+</div>
+
+<!-- Seção de Produtos -->
+<div class="p-4 space-y-3">
+  <div class="flex justify-between items-center px-1">
+    <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">
+      Produtos em Destaque
+    </h3>
+    <span class="text-[11px] text-slate-400">3 itens disponíveis</span>
+  </div>
+
+  <!-- Lista de Produtos Formatada -->
+  <div class="space-y-3">
+    {% for p in produtos %}
+    <div
+      class="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between hover:border-slate-300 transition-all group"
+    >
+      <div class="flex items-center gap-3.5">
+        <!-- Ícone / Placeholder Visual do Produto -->
+        <div
+          class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 text-base font-semibold group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors"
+        >
+          {% if 'Ferramentas' in p.categoria %}
+          <i class="fa-solid fa-wrench"></i>
+          {% else %}
+          <i class="fa-solid fa-lightbulb"></i>
+          {% endif %}
+        </div>
+        <div>
+          <span
+            class="text-[10px] font-bold uppercase text-blue-600 tracking-wider"
+            >{{ p.categoria }}</span
+          >
+          <h4 class="font-bold text-slate-800 text-xs leading-snug">
+            {{ p.nome }}
+          </h4>
+          <p class="text-sm font-extrabold text-slate-900 mt-0.5">
+            R$ {{ "%.2f"|format(p.preco) }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Botão Adicionar -->
+      <a
+        href="{{ url_for('carrinho') }}"
+        class="bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs font-semibold px-3.5 py-2 rounded-xl shadow-md shadow-blue-600/20 flex items-center gap-1.5 transition-all"
+      >
+        <span>Adicionar</span>
+        <i class="fa-solid fa-plus text-[10px]"></i>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Rodapé Informativo da Tela -->
+<div class="p-4 pt-1 text-center">
+  <div
+    class="bg-slate-100 border border-slate-200/60 rounded-xl p-3 flex items-center justify-center gap-2 text-slate-500 text-[11px]"
+  >
+    <i class="fa-solid fa-shield-halved text-blue-600"></i>
+    <span>Compra local segura • Atendimento via WhatsApp</span>
+  </div>
+</div>
+{% endblock %}

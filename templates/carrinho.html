@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %}
+<div
+  class="bg-slate-900 text-white text-center py-1.5 text-[10px] font-semibold mb-3 rounded"
+>
+  O TEU CARRINHO
+</div>
+<div class="space-y-2.5">
+  {% for item in itens %}
+  <div class="p-2.5 border rounded-lg flex justify-between items-center">
+    <div>
+      <h4 class="font-bold text-xs text-gray-800">{{ item.nome }}</h4>
+      <p class="text-[10px] text-gray-500">
+        Qtd: {{ item.qtd }} — R$ {{ "%.2f"|format(item.preco) }}
+      </p>
+    </div>
+    <span class="font-bold text-xs"
+      >R$ {{ "%.2f"|format(item.preco * item.qtd) }}</span
+    >
+  </div>
+  {% endfor %}
+</div>
+<div class="mt-3 p-2.5 bg-gray-50 rounded-lg space-y-1 text-xs border">
+  <div class="flex justify-between text-gray-600">
+    <span>Subtotal:</span><span>R$ {{ "%.2f"|format(total) }}</span>
+  </div>
+  <div class="flex justify-between text-gray-600">
+    <span>Portes de Envio:</span
+    ><span class="text-green-600 font-bold">Grátis</span>
+  </div>
+  <div
+    class="flex justify-between font-bold text-sm text-gray-900 border-t pt-1.5"
+  >
+    <span>Total:</span><span>R$ {{ "%.2f"|format(total) }}</span>
+  </div>
+</div>
+<a
+  href="{{ whatsapp_url }}"
+  target="_blank"
+  class="mt-3 w-full bg-green-600 text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 text-xs hover:bg-green-700 transition"
+>
+  <span>💬</span> Fechar Pedido via WhatsApp
+</a>
+<div class="mt-2 text-center">
+  <a
+    href="{{ url_for('catalogo') }}"
+    class="text-[10px] text-gray-500 underline"
+    >← Voltar ao Catálogo</a
+  >
+</div>
+{% endblock %}
