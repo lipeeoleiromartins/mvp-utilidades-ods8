@@ -11,7 +11,7 @@ Aplicação Web desenvolvida como Produto Viável Mínimo (MVP) para otimizaçã
 ## 📂 Estrutura do Projeto
 * `app.py`: Configuração principal do servidor, rotas e modelos da base de dados.
 * `requirements.txt`: Dependências do projeto Python.
-* `templates/`: Ficheiros HTML contendo as telas principais (`catalogo.html`, `carrinho.html` e `admin.html`) com herança através do `base.html`.
+* `templates/`: Ficheiros HTML contendo as telas principais (`catalogo.html`, `carrinho.html`, `admin.html` e `base.html`).
 
 ## 🛠️ Como Executar o Projeto Localmente
 
